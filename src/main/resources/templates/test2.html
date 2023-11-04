@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<table border = "2">
+<tbody>
+
+<tr th:each="St : ${stdl}">
+<td th:text = "*{St.roll}"/>
+<td th:text = "*{St.name}"/>
+<td th:text = "*{St.marks}"/>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
