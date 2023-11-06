@@ -1,19 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Student Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(odd) {
+            background-color: #e6e6e6;
+        }
+        td:last-child {
+            display: flex;
+            justify-content: space-around;
+        }
+        .action-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .action-button:hover {
+            background-color: #297fb8;
+        }
+    </style>
 </head>
 <body>
-<table border = "2">
-<tbody>
-
-<tr th:each="St : ${stdl}">
-<td th:text = "*{St.roll}"/>
-<td th:text = "*{St.name}"/>
-<td th:text = "*{St.marks}"/>
-</tr>
-</tbody>
-</table>
+    <h2>Student Records</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="std : ${stdl}">
+                <td th:text="${std.roll}"></td>
+                <td th:text="${std.name}"></td>
+                <td th:text="${std.marks}"></td>
+                <td>
+                    <form th:action="@{/delete/{roll}(roll=${std.roll})}" method="post">
+                        <input type="submit" class="action-button" value="Delete">
+                    </form>
+                    <form th:action="@{/update/{roll}(roll=${std.roll})}" method="get">
+                        <input type="submit" class="action-button" value="Update">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

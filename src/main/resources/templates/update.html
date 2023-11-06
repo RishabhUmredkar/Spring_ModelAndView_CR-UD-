@@ -2,11 +2,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Student Registration</title>
+    <title>Update Student</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
         }
         form {
             width: 300px;
@@ -15,6 +19,7 @@
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
+            animation: fade-in 0.5s;
         }
         input[type="text"] {
             width: 100%;
@@ -35,21 +40,25 @@
         input[type="submit"]:hover {
             background-color: #297fb8;
         }
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <form action="/reg" th:action="@{/reg}" th:object="${obj}" method="post">
-        <h2>Student Registration</h2>
-        <label for="roll">Roll:</label>
-        <input type="text" id="roll" name="roll" th:field="*{roll}" required><br>
-
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" th:field="*{name}" required><br>
-
-        <label for="marks">Marks:</label>
-        <input type="text" id="marks" name="marks" th:field="*{marks}" required><br>
-
-        <input type="submit" value="Register">
+    <h2>Update Student</h2>
+    <form action="/update/{roll}" th:object="${obj}" th:action="@{/update/{roll}(roll=${obj.roll})}" method="post">
+        <input type="hidden" th:field="*{roll}" />
+        Name: <input type="text" th:field="*{name}" /><br>
+        Marks: <input type="text" th:field="*{marks}" /><br>
+        <input type="submit" value="Update" />
     </form>
 </body>
 </html>
